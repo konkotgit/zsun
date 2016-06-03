@@ -205,6 +205,7 @@ platform_check_image() {
 	dir-615-c1 | \
 	dir-615-e1 | \
 	dir-615-e4 | \
+	dir-615-i1 | \
 	dir-825-c1 | \
 	dir-835-a1 | \
 	dlan-pro-500-wp | \
@@ -247,7 +248,8 @@ platform_check_image() {
 	nbg460n_550n_550nh | \
 	unifi | \
 	unifi-outdoor | \
-	carambola2 )
+	carambola2 | \
+	weio )
 		[ "$magic" != "2705" ] && {
 			echo "Invalid image type."
 			return 1
@@ -311,6 +313,7 @@ platform_check_image() {
 	el-mini | \
 	gl-inet | \
 	mc-mac1200r | \
+	minibox-v1 |\
 	onion-omega | \
 	oolite | \
 	smart-300 | \
@@ -335,6 +338,7 @@ platform_check_image() {
 	tl-wa901nd | \
 	tl-wa901nd-v2 | \
 	tl-wa901nd-v3 | \
+	tl-wa901nd-v4 | \
 	tl-wdr3500 | \
 	tl-wdr4300 | \
 	tl-wdr4900-v2 | \
@@ -351,6 +355,7 @@ platform_check_image() {
 	tl-wr842n-v2 | \
 	tl-wr941nd | \
 	tl-wr941nd-v5 | \
+	tl-wr941nd-v6 | \
 	tl-wr1041n-v2 | \
 	tl-wr1043nd | \
 	tl-wr1043nd-v2 | \
@@ -398,7 +403,8 @@ platform_check_image() {
 	wndr3700 | \
 	wnr2000-v3 | \
 	wnr612-v2 | \
-	wnr1000-v2)
+	wnr1000-v2 | \
+	wpn824n)
 		local hw_magic
 
 		hw_magic="$(ar71xx_get_mtd_part_magic firmware)"
@@ -444,13 +450,20 @@ platform_check_image() {
 		fi
 		return 0
 		;;
-    wnr2000-v4)
+	wnr2000-v4)
 		[ "$magic_long" != "32303034" ] && {
 			echo "Invalid image type."
 			return 1
 		}
 		return 0
 		;;
+	wnr2200)
+                [ "$magic_long" != "32323030" ] && {
+                        echo "Invalid image type."
+                        return 1
+                }
+                return 0
+                ;;
 
 	esac
 
